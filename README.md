@@ -1,6 +1,6 @@
 
 
-# RsJourneyCrafter
+# Runescape Journey Crafter
 
 This project was generated using [Nx](https://nx.dev).
 

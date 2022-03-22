@@ -3,14 +3,14 @@ import { render } from "@testing-library/react";
 
 import LogoutButton from "./LogoutButton";
 
-describe("LoginButton", () => {
+describe("LogoutButton", () => {
     it("should render successfully", () => {
         const { baseElement } = render(<LogoutButton />);
 
         expect(baseElement).toBeTruthy();
     });
 
-    it("should say Login", () => {
+    it("should say Logout", () => {
         const { getByText } = render(<LogoutButton />);
 
         expect(getByText(/Logout/gi)).toBeTruthy();

@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
-import Header from "./Header";
+import HeaderMenu from "./header-menu";
 
-describe("Header", () => {
+describe("HeaderMenu", () => {
     it("should render successfully", () => {
-        const { baseElement } = render(<Header />);
+        const { baseElement } = render(<HeaderMenu />);
 
         expect(baseElement).toBeTruthy();
     });

@@ -1,7 +1,7 @@
 import * as Auth0 from "@auth0/auth0-react";
 import { render } from "@testing-library/react";
 
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./logout-button";
 
 describe("LogoutButton", () => {
     it("should render successfully", () => {

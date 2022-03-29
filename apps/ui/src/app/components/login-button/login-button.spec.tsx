@@ -1,7 +1,7 @@
 import * as Auth0 from "@auth0/auth0-react";
 import { render } from "@testing-library/react";
 
-import LoginButton from "./LoginButton";
+import LoginButton from "./login-button";
 
 describe("LoginButton", () => {
     it("should render successfully", () => {

@@ -1,4 +1,4 @@
-import { Account } from "../../components/header/header-menu/accounts-dropdown/accounts-dropdown";
+import { Account } from "../../data/use-accounts/use-accounts";
 import { createContext } from "react";
 
 interface SelectedAccount {

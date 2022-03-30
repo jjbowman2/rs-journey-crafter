@@ -5,4 +5,5 @@ export const environment = {
     production: false,
     REACT_APP_AUTH0_DOMAIN: "dev-jjbowman2.auth0.com",
     REACT_APP_AUTH0_CLIENT_ID: "dJlI8eGj9F9zcoAvTtRpwTsXzQT4f2Yy",
+    API_ENDPOINT: "http://localhost:3333/graphql",
 };

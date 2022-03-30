@@ -1,4 +1,4 @@
-import { Box, Flex, Show, Text } from "@chakra-ui/react";
+import { Box, Flex, Show, Spacer, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import HeaderMenu from "./header-menu/header-menu";
 
@@ -13,7 +13,8 @@ const Header = () => {
                     RS Journey Crafter
                 </Text>
             </Show>
-            <Box ml="auto">
+            <Spacer />
+            <Box>
                 <HeaderMenu />
             </Box>
         </Flex>

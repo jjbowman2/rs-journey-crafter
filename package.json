@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
+        "postinstall": "prisma generate --schema=apps/api/prisma/schema.prisma",
         "start": "node dist/apps/api/main.js",
         "build": "nx build --production",
         "test": "nx test"

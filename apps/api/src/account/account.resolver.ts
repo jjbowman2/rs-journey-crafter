@@ -23,6 +23,11 @@ export class AccountResolver {
         return this.accountService.findOne(id);
     }
 
+    @Query(() => [Account], { name: "account" })
+    findByUserId(@Args("userId", { type: () => String }) userId: string) {
+        return this.accountService.findByUserId(userId);
+    }
+
     @Mutation(() => Account)
     updateAccount(@Args("updateAccountInput") updateAccountInput: UpdateAccountInput) {
         return this.accountService.update(updateAccountInput.id, updateAccountInput);

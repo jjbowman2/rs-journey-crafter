@@ -7,7 +7,7 @@ describe("DependencyResolver", () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [DependencyResolver, DependencyService],
+            providers: [DependencyResolver, { provide: DependencyService, useValue: {} }],
         }).compile();
 
         resolver = module.get<DependencyResolver>(DependencyResolver);

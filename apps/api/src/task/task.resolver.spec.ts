@@ -7,7 +7,7 @@ describe("TaskResolver", () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [TaskResolver, TaskService],
+            providers: [TaskResolver, { provide: TaskService, useValue: {} }],
         }).compile();
 
         resolver = module.get<TaskResolver>(TaskResolver);

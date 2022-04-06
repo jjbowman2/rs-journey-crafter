@@ -2,8 +2,8 @@ import { Account } from "@prisma/client";
 import { createContext } from "react";
 
 interface SelectedAccount {
-    selectedAccount?: Account;
-    setSelectedAccount: React.Dispatch<React.SetStateAction<Account | undefined>>;
+    selectedAccount: Account | undefined | null;
+    setSelectedAccount: React.Dispatch<React.SetStateAction<Account | undefined | null>>;
 }
 
 const SelectedAccountContext = createContext<SelectedAccount>({

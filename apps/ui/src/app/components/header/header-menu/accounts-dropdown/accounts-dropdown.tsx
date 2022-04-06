@@ -20,7 +20,9 @@ const AccountsDropdown = ({ sub }: AccountsDropdownProps) => {
             if (selectedAccountId == null || !data.find((account) => account.id.toString() === selectedAccountId)) {
                 selectedAccountId = data[0]?.id.toString();
             }
-            setSelectedAccount(data.find((account) => account.id.toString() === selectedAccountId));
+
+            // set as null to indicate a lack of accounts (as opposed to none yet selected due to loading)
+            setSelectedAccount(data.find((account) => account.id.toString() === selectedAccountId) || null);
         }
     }, [data, setSelectedAccount]);
 

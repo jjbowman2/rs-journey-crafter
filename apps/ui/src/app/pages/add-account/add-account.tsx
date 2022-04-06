@@ -1,10 +1,29 @@
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Container, Flex, FormControl, FormLabel, Heading, Input, Select } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import { useHistory } from "react-router-dom";
+import SelectedAccountContext from "../../contexts/selected-account/selected-account-context";
+import { createAccount } from "../../data/use-accounts/use-accounts";
 
 export function AddAccount() {
     const { register, handleSubmit } = useForm();
-    const onSubmit = (data: any) => console.log(data);
+    const { user } = useAuth0();
+    const { setSelectedAccount } = useContext(SelectedAccountContext);
+    const history = useHistory();
+    const queryClient = useQueryClient();
+    const mutation = useMutation(createAccount, {
+        onSuccess: (account) => {
+            setSelectedAccount(account);
+            queryClient.invalidateQueries({ queryKey: "accounts" });
+            history.push("/");
+        },
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onSubmit = ({ accountName, game, accountType }: any) => {
+        if (user?.sub) mutation.mutate({ userId: user.sub, accountName, game, accountType });
+    };
 
     return (
         <Container maxW="container.md">

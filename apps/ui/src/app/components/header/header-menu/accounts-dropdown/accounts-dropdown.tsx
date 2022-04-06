@@ -4,7 +4,8 @@ import SelectedAccountContext from "../../../../contexts/selected-account/select
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../../../logout-button/logout-button";
-import useAccounts, { AccountType, Game } from "../../../../data/use-accounts/use-accounts";
+import useAccounts from "../../../../data/use-accounts/use-accounts";
+import { AccountType, Game } from "@prisma/client";
 
 export interface AccountsDropdownProps {
     sub: string | undefined;
@@ -18,11 +19,14 @@ const AccountsDropdown = ({ sub }: AccountsDropdownProps) => {
             let selectedAccountId = localStorage.getItem("selected-account-id");
             if (selectedAccountId == null || !data.find((account) => account.id.toString() === selectedAccountId)) {
                 selectedAccountId = data[0]?.id.toString();
-                localStorage.setItem("selected-account-id", selectedAccountId);
             }
             setSelectedAccount(data.find((account) => account.id.toString() === selectedAccountId));
         }
     }, [data, setSelectedAccount]);
+
+    useEffect(() => {
+        if (!isLoading && !isError) localStorage.setItem("selected-account-id", selectedAccount?.id.toString() || "");
+    }, [selectedAccount, isLoading, isError]);
 
     if (isError || isLoading) {
         return null;

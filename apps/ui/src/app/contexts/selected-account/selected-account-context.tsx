@@ -1,4 +1,4 @@
-import { Account } from "../../data/use-accounts/use-accounts";
+import { Account } from "@prisma/client";
 import { createContext } from "react";
 
 interface SelectedAccount {

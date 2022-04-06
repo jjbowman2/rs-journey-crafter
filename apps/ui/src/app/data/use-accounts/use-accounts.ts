@@ -1,34 +1,49 @@
 import { request, gql } from "graphql-request";
 import { environment } from "../../../environments/environment";
 import { useQuery, UseQueryResult } from "react-query";
+import { Prisma, Account } from "@prisma/client";
 const endpoint = environment.API_ENDPOINT;
 
-export enum Game {
-    osrs = "osrs",
-    rs = "rs",
-    osrs_leagues = "osrs_leagues",
-}
+export const createAccount = async (createInput: Prisma.AccountCreateInput): Promise<Account> => {
+    const { createAccount } = await request(
+        endpoint,
+        gql`
+            mutation CreateAccount($createAccountInput: CreateAccountInput!) {
+                createAccount(createAccountInput: $createAccountInput) {
+                    id
+                    userId
+                    accountName
+                    game
+                    accountType
+                }
+            }
+        `,
+        { createAccountInput: createInput },
+    );
+    return createAccount;
+};
 
-export enum AccountType {
-    main = "main",
-    ironman = "ironman",
-    hardcore_ironman = "hardcore_ironman",
-    group_ironman = "group_ironman",
-    ultimate_ironman = "ultimate_ironman",
-}
-
-export interface Account {
-    id: number;
-    userId: string;
-    accountName: string;
-    game: Game;
-    accountType: AccountType | null;
-}
+export const updateAccount = async (updateInput: Prisma.AccountCreateInput): Promise<Account> => {
+    const { updateAccount } = await request(
+        endpoint,
+        gql`
+            mutation UpdateAccount($updateAccountInput: UpdateAccountInput!) {
+                updateAccount(updateAccountInput: $updateAccountInput) {
+                    id
+                    userId
+                    accountName
+                    game
+                    accountType
+                }
+            }
+        `,
+        { updateAccountInput: updateInput },
+    );
+    return updateAccount;
+};
 
 const getAccounts = async (sub: string | undefined): Promise<Account[]> => {
-    const {
-        accounts: { data },
-    } = await request(
+    const { account } = await request(
         endpoint,
         gql`
             query Account($userId: String!) {
@@ -43,7 +58,7 @@ const getAccounts = async (sub: string | undefined): Promise<Account[]> => {
         `,
         { userId: sub },
     );
-    return data;
+    return account;
 };
 
 export function useAccounts(sub: string | undefined): UseQueryResult<Account[]> {

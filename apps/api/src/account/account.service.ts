@@ -5,33 +5,33 @@ import { UpdateAccountInput } from "./dto/update-account.input";
 
 @Injectable()
 export class AccountService {
-    constructor(@Inject(PrismaService) private prismaService: PrismaService) {}
+	constructor(@Inject(PrismaService) private prismaService: PrismaService) {}
 
-    create(createAccountInput: CreateAccountInput) {
-        console.log(createAccountInput);
-        return this.prismaService.account.create({ data: createAccountInput });
-    }
+	create(createAccountInput: CreateAccountInput) {
+		console.log(createAccountInput);
+		return this.prismaService.account.create({ data: createAccountInput });
+	}
 
-    findAll() {
-        return this.prismaService.account.findMany();
-    }
+	findAll() {
+		return this.prismaService.account.findMany();
+	}
 
-    findOne(id: number) {
-        return this.prismaService.account.findFirst({ where: { id } });
-    }
+	findOne(id: string) {
+		return this.prismaService.account.findFirst({ where: { id } });
+	}
 
-    findByUserId(userId: string) {
-        return this.prismaService.account.findMany({ where: { userId } });
-    }
+	findByUserId(userId: string) {
+		return this.prismaService.account.findMany({ where: { userId } });
+	}
 
-    update(id: number, updateAccountInput: UpdateAccountInput) {
-        return this.prismaService.account.update({
-            where: { id },
-            data: updateAccountInput,
-        });
-    }
+	update(id: string, updateAccountInput: UpdateAccountInput) {
+		return this.prismaService.account.update({
+			where: { id },
+			data: updateAccountInput,
+		});
+	}
 
-    remove(id: number) {
-        return this.prismaService.account.delete({ where: { id } });
-    }
+	remove(id: string) {
+		return this.prismaService.account.delete({ where: { id } });
+	}
 }

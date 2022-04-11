@@ -1,32 +1,42 @@
+import { Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Redirect } from "react-router-dom";
+import TaskCard from "../../../components/task-card/task-card";
 import SelectedAccountContext from "../../../contexts/selected-account/selected-account-context";
 import useTasks from "../../../data/use-tasks/use-tasks";
+import JourneyToolbar from "./journey-toolbar/journey-toolbar";
 
 export function MyJourney() {
-    const { selectedAccount } = useContext(SelectedAccountContext);
-    const accountId = Number(selectedAccount?.id);
-    const { isError, isLoading, data } = useTasks(accountId);
+	const { selectedAccount } = useContext(SelectedAccountContext);
+	const accountId = selectedAccount?.id;
+	const { isError, isLoading, data } = useTasks(accountId);
 
-    // if selectedAccount is null (as opposed to undefined) no accounts were found
-    if (selectedAccount === null) {
-        <Redirect to="/welcome" />;
-    }
+	// if selectedAccount is null (as opposed to undefined) no accounts were found
+	if (selectedAccount === null) {
+		<Redirect to="/welcome" />;
+	}
 
-    // query is dependent on loading the selectedAccount, loading won't start unless selectedAccount is truthy
-    if (isLoading || !selectedAccount) {
-        return <p>Loading...</p>;
-    }
+	// query is dependent on loading the selectedAccount, loading won't start unless selectedAccount is truthy
+	if (isLoading || !selectedAccount) {
+		return <p>Loading...</p>;
+	}
 
-    if (isError) {
-        return <p>There was a problem loading your latest journey information.</p>;
-    }
+	if (isError) {
+		return <p>There was a problem loading your latest journey information.</p>;
+	}
 
-    if (data?.length === 0) {
-        return <p>You don't have any tasks. Try adding some to get your journey started.</p>;
-    }
-
-    return <p>{JSON.stringify(data)}</p>;
+	return (
+		<>
+			<JourneyToolbar />
+			{data?.length === 0 ? (
+				<Text mt={8} fontSize="lg">
+					You don't have any tasks. Try adding a few now to get your journey started.
+				</Text>
+			) : (
+				data?.map((task) => <TaskCard key={`task${task.id}`} task={task} />)
+			)}
+		</>
+	);
 }
 
 export default MyJourney;

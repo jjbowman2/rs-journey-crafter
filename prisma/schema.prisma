@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Account {
-    id          Int          @id @default(autoincrement())
+    id          String       @id @default(uuid())
     userId      String
     accountName String
     game        Game
@@ -20,9 +20,9 @@ model Account {
 }
 
 model Task {
-    id                 Int          @id @default(autoincrement())
+    id                 String       @id @default(uuid())
     account            Account      @relation(fields: [accountId], references: [id])
-    accountId          Int
+    accountId          String
     taskType           TaskType
     title              String
     description        String?
@@ -39,16 +39,16 @@ model Task {
 }
 
 model Dependency {
-    dependee    Task @relation("dependee", fields: [dependeeId], references: [id])
-    dependeeId  Int
-    dependent   Task @relation("dependent", fields: [dependentId], references: [id])
-    dependentId Int
+    dependee    Task   @relation("dependee", fields: [dependeeId], references: [id])
+    dependeeId  String
+    dependent   Task   @relation("dependent", fields: [dependentId], references: [id])
+    dependentId String
 
     @@id([dependeeId, dependentId])
 }
 
 model Template {
-    id          Int            @id @default(autoincrement())
+    id          String         @id @default(uuid())
     name        String
     description String?
     tags        String[]
@@ -56,9 +56,9 @@ model Template {
 }
 
 model TemplateTask {
-    id                 Int                  @id @default(autoincrement())
+    id                 String               @id @default(uuid())
     template           Template             @relation(fields: [templateId], references: [id])
-    templateId         Int
+    templateId         String
     taskType           TaskType
     title              String
     description        String?
@@ -74,9 +74,9 @@ model TemplateTask {
 
 model TemplateDependency {
     dependee    TemplateTask @relation("templateDependee", fields: [dependeeId], references: [id])
-    dependeeId  Int
+    dependeeId  String
     dependent   TemplateTask @relation("templateDependent", fields: [dependentId], references: [id])
-    dependentId Int
+    dependentId String
 
     @@id([dependeeId, dependentId])
 }

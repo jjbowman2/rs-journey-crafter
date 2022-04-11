@@ -5,32 +5,32 @@ import { UpdateTaskInput } from "./dto/update-task.input";
 
 @Injectable()
 export class TaskService {
-    constructor(@Inject(PrismaService) private prismaService: PrismaService) {}
+	constructor(@Inject(PrismaService) private prismaService: PrismaService) {}
 
-    create(createTaskInput: CreateTaskInput) {
-        return this.prismaService.task.create({ data: createTaskInput });
-    }
+	create(createTaskInput: CreateTaskInput) {
+		return this.prismaService.task.create({ data: createTaskInput });
+	}
 
-    findAll() {
-        return this.prismaService.task.findMany();
-    }
+	findAll() {
+		return this.prismaService.task.findMany();
+	}
 
-    findOne(id: number) {
-        return this.prismaService.task.findFirst({ where: { id } });
-    }
+	findOne(id: string) {
+		return this.prismaService.task.findFirst({ where: { id } });
+	}
 
-    findAllByAccountId(accountId: number) {
-        return this.prismaService.task.findMany({ where: { accountId } });
-    }
+	findAllByAccountId(accountId: string) {
+		return this.prismaService.task.findMany({ where: { accountId } });
+	}
 
-    update(id: number, updateTaskInput: UpdateTaskInput) {
-        return this.prismaService.task.update({
-            where: { id },
-            data: updateTaskInput,
-        });
-    }
+	update(id: string, updateTaskInput: UpdateTaskInput) {
+		return this.prismaService.task.update({
+			where: { id },
+			data: updateTaskInput,
+		});
+	}
 
-    remove(id: number) {
-        return this.prismaService.task.delete({ where: { id } });
-    }
+	remove(id: string) {
+		return this.prismaService.task.delete({ where: { id } });
+	}
 }

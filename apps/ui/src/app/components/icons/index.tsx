@@ -65,3 +65,33 @@ export const CheckIcon = (props: IconProps) => (
 		<i className="fa-solid fa-check" />
 	</Icon>
 );
+
+export const DownIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-angle-down" />
+	</Icon>
+);
+
+export const UpIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-angle-up" />
+	</Icon>
+);
+
+export const FlagIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-flag" />
+	</Icon>
+);
+
+export const PlusIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-plus" />
+	</Icon>
+);
+
+export const TrashIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-trash" />
+	</Icon>
+);

@@ -76,7 +76,7 @@ export function CreateTasksModal(props: CreateTasksModalProps) {
 
 	return (
 		<>
-			<IconButton aria-label="Create Task" icon={<CreateEditIcon />} onClick={onOpen} />
+			<IconButton aria-label="Create Task" icon={<CreateEditIcon />} onClick={onOpen} variant="ghost" />
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 				<ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>

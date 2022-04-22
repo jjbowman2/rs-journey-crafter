@@ -8,6 +8,7 @@ import SelectedAccountContext from "./contexts/selected-account/selected-account
 import AddAccount from "./pages/add-account/add-account";
 import Dashboards from "./pages/dashboards/dashboards";
 import TaskPage from "./pages/task-page/task-page";
+import EditTaskPage from "./pages/edit-task-page/edit-task-page";
 
 export default function App() {
 	const [selectedAccount, setSelectedAccount] = useState<Account | null>();
@@ -19,13 +20,16 @@ export default function App() {
 					<Route path="/" exact>
 						<Dashboards />
 					</Route>
-					<Route path="/task/:id">
+					<Route path="/task/:id" exact>
 						<TaskPage />
+					</Route>
+					<Route path="/task/:id/edit">
+						<EditTaskPage />
 					</Route>
 					<Route path="/welcome">
 						<Welcome />
 					</Route>
-					<Route path="/add-account">
+					<Route path="/account/new">
 						<AddAccount />
 					</Route>
 				</Switch>

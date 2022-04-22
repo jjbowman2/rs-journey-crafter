@@ -16,6 +16,7 @@
         "@emotion/react": "^11.8.2",
         "@emotion/styled": "^11.8.1",
         "@faker-js/faker": "^6.0.0",
+        "@fontsource/inter": "^4.5.7",
         "@nestjs/apollo": "^10.0.7",
         "@nestjs/common": "^8.0.0",
         "@nestjs/core": "^8.0.0",

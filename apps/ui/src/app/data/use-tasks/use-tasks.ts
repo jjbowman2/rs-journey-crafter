@@ -1,8 +1,13 @@
 import { request, gql } from "graphql-request";
 import { environment } from "../../../environments/environment";
 import { useQuery, UseQueryResult } from "react-query";
-import { Prisma, Task } from "@prisma/client";
+import { Account, Prisma, Task as PrismaTask } from "@prisma/client";
+
 const endpoint = environment.API_ENDPOINT;
+
+export interface Task extends PrismaTask {
+	account: Account;
+}
 
 export const createTask = async (createInput: Prisma.TaskUncheckedCreateInput): Promise<Task> => {
 	const { createTask } = await request(
@@ -56,9 +61,9 @@ const getTask = async (id: string | undefined): Promise<Task> => {
 			query Task($id: String!) {
 				task(id: $id) {
 					id
-					# account {
-					# 	id
-					# }
+					account {
+						id
+					}
 					taskType
 					title
 					description
@@ -90,9 +95,9 @@ const getTasks = async (accountId: string | undefined): Promise<Task[]> => {
 			query TasksByAccountId($accountId: String!) {
 				tasksByAccountId(accountId: $accountId) {
 					id
-					# account {
-					# 	id
-					# }
+					account {
+						id
+					}
 					taskType
 					title
 					description

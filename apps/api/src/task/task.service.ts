@@ -12,15 +12,15 @@ export class TaskService {
 	}
 
 	findAll() {
-		return this.prismaService.task.findMany();
+		return this.prismaService.task.findMany({ include: { account: true, dependees: true } });
 	}
 
 	findOne(id: string) {
-		return this.prismaService.task.findFirst({ where: { id } });
+		return this.prismaService.task.findFirst({ where: { id }, include: { account: true, dependees: true } });
 	}
 
 	findAllByAccountId(accountId: string) {
-		return this.prismaService.task.findMany({ where: { accountId } });
+		return this.prismaService.task.findMany({ where: { accountId }, include: { account: true, dependees: true } });
 	}
 
 	update(id: string, updateTaskInput: UpdateTaskInput) {

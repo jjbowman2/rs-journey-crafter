@@ -1,8 +1,6 @@
 import { Button } from "@chakra-ui/react";
-import { useContext } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory, useParams } from "react-router-dom";
-import SelectedAccountContext from "../../contexts/selected-account/selected-account-context";
 import { removeTask, useTask } from "../../data/use-tasks/use-tasks";
 
 /* eslint-disable-next-line */
@@ -15,14 +13,12 @@ type IdParam = {
 export function TaskPage(props: TaskPageProps) {
 	const { id } = useParams<IdParam>();
 	const { isLoading, isError, data } = useTask(id);
-	// TODO: swap for account id from task once reference works
-	const { selectedAccount } = useContext(SelectedAccountContext);
 	const history = useHistory();
 	const queryClient = useQueryClient();
 	const mutation = useMutation(removeTask, {
-		onMutate: () => queryClient.cancelQueries(["tasks", selectedAccount?.id]),
+		onMutate: () => queryClient.cancelQueries(["tasks", data?.account.id]),
 		onSettled: () => {
-			queryClient.invalidateQueries(["tasks", selectedAccount?.id]);
+			queryClient.invalidateQueries(["tasks", data?.account.id]);
 			history.push("/");
 		},
 	});

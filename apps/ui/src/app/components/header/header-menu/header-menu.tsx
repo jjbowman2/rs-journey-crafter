@@ -22,6 +22,7 @@ const HeaderMenu = () => {
 				aria-label="color-mode"
 				icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
 				onClick={toggleColorMode}
+				variant="ghost"
 			/>
 			<AccountsDropdown sub={user?.sub} />
 		</Flex>

@@ -5,8 +5,9 @@ import { Account, Prisma, Task as PrismaTask } from "@prisma/client";
 
 const endpoint = environment.API_ENDPOINT;
 
-export interface Task extends PrismaTask {
+export interface Task extends Omit<PrismaTask, "accountId"> {
 	account: Account;
+	dependees: Task[];
 }
 
 export const createTask = async (createInput: Prisma.TaskUncheckedCreateInput): Promise<Task> => {
@@ -63,6 +64,7 @@ const getTask = async (id: string | undefined): Promise<Task> => {
 					id
 					account {
 						id
+						game
 					}
 					taskType
 					title
@@ -75,6 +77,21 @@ const getTask = async (id: string | undefined): Promise<Task> => {
 					dependees {
 						dependee {
 							id
+							account {
+								id
+								game
+							}
+							taskType
+							title
+							description
+							skill
+							level
+							questId
+							achievementDiaryId
+							combatTaskId
+							complete
+							labels
+							createdAt
 						}
 					}
 					complete
@@ -97,6 +114,7 @@ const getTasks = async (accountId: string | undefined): Promise<Task[]> => {
 					id
 					account {
 						id
+						game
 					}
 					taskType
 					title

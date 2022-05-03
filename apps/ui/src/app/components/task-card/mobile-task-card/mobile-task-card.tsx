@@ -1,7 +1,7 @@
 import { Flex, Box, Heading, Text, Checkbox, Stack, useColorModeValue, LinkBox, LinkOverlay } from "@chakra-ui/react";
-import { Task } from "@prisma/client";
+import { Task } from "../../../data/use-tasks/use-tasks";
 import { Link } from "react-router-dom";
-import { TaskDefaultIcon } from "../../icons";
+import TaskIcon from "../task-icon/task-icon";
 
 export interface MobileTaskCardProps {
 	task: Task;
@@ -13,11 +13,11 @@ export function MobileTaskCard({ task, toggleComplete }: MobileTaskCardProps) {
 	return (
 		<Flex alignItems="center" my={4}>
 			<Checkbox size="lg" isChecked={task.complete} onChange={toggleComplete} mx={8} />
-			<LinkBox flex="1">
+			<LinkBox flex="1" pr={8}>
 				<LinkOverlay as={Link} to={`task/${task.id}`}>
 					<Stack py={8}>
 						<Flex alignItems="center">
-							<TaskDefaultIcon w={6} h={6} mr="10px" color={color} />
+							<TaskIcon task={task} w={6} h={6} mr="10px" color={color} />
 							<Box>
 								<Heading
 									textAlign="left"

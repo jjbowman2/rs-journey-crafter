@@ -1,9 +1,7 @@
 import { Box, Hide, Show, useColorModeValue } from "@chakra-ui/react";
 import { Task } from "../../data/use-tasks/use-tasks";
 import { motion } from "framer-motion";
-import { useContext } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import SelectedAccountContext from "../../contexts/selected-account/selected-account-context";
 import { updateTask } from "../../data/use-tasks/use-tasks";
 import DesktopTaskCard from "./desktop-task-card/desktop-task-card";
 import MobileTaskCard from "./mobile-task-card/mobile-task-card";
@@ -13,13 +11,11 @@ export interface TaskCardProps {
 }
 
 export function TaskCard({ task }: TaskCardProps) {
-	// TODO: swap for account id from task once reference works
 	const bg = useColorModeValue("white", "gray.600");
-	const { selectedAccount } = useContext(SelectedAccountContext);
 	const queryClient = useQueryClient();
 	const mutation = useMutation(updateTask, {
-		onMutate: () => queryClient.cancelQueries(["tasks", selectedAccount?.id]),
-		onSettled: () => queryClient.invalidateQueries(["tasks", selectedAccount?.id]),
+		onMutate: () => queryClient.cancelQueries(["tasks", task?.account.id]),
+		onSettled: () => queryClient.invalidateQueries(["tasks", task?.account.id]),
 	});
 
 	const toggleComplete = () => {

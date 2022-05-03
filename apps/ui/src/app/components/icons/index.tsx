@@ -95,3 +95,9 @@ export const TrashIcon = (props: IconProps) => (
 		<i className="fa-solid fa-trash" />
 	</Icon>
 );
+
+export const ChevronLeftIcon = (props: IconProps) => (
+	<Icon {...props}>
+		<i className="fa-solid fa-chevron-left" />
+	</Icon>
+);

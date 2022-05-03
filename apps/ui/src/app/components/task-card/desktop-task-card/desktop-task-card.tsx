@@ -12,12 +12,14 @@ import {
 	LinkBox,
 	LinkOverlay,
 	useDisclosure,
+	Tag,
 } from "@chakra-ui/react";
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Task } from "../../../data/use-tasks/use-tasks";
 import { Link } from "react-router-dom";
 import DeleteTaskDialog from "../../delete-task-dialog/delete-task-dialog";
-import { TaskDefaultIcon, DownIcon, UpIcon, CreateEditIcon, FlagIcon, PlusIcon, TrashIcon } from "../../icons";
+import { DownIcon, UpIcon, CreateEditIcon, FlagIcon, PlusIcon, TrashIcon } from "../../icons";
+import TaskIcon from "../task-icon/task-icon";
 
 export interface DesktopTaskCardProps {
 	task: Task;
@@ -37,7 +39,7 @@ export function DesktopTaskCard({ task, toggleComplete }: DesktopTaskCardProps) 
 					<LinkOverlay as={Link} to={`task/${task.id}`}>
 						<Stack py={8}>
 							<Flex>
-								<TaskDefaultIcon w={6} h={6} mr="10px" color={color} />
+								<TaskIcon task={task} w={6} h={6} mr="10px" color={color} />
 								<Box>
 									<Heading
 										textAlign="left"
@@ -71,6 +73,15 @@ export function DesktopTaskCard({ task, toggleComplete }: DesktopTaskCardProps) 
 					<IconButton aria-label="Expand task" m={8} variant="ghost" icon={<DownIcon />} onClick={toggle} />
 				)}
 			</Flex>
+			{task.labels?.length > 0 && (
+				<Flex px={8} gap={2} hidden={!expanded}>
+					{task.labels.map((label) => (
+						<Tag key={label} size="lg" colorScheme="orange" borderRadius="full">
+							{label}
+						</Tag>
+					))}
+				</Flex>
+			)}
 			<Flex justifyContent="right" hidden={!expanded} gap={2} pr={8} pb={8}>
 				<Tooltip placement="top" label="Edit task" openDelay={500}>
 					<IconButton
@@ -79,7 +90,7 @@ export function DesktopTaskCard({ task, toggleComplete }: DesktopTaskCardProps) 
 						variant="ghost"
 						size="lg"
 						as={Link}
-						to={`task/${task.id}/edit`}
+						to={`/task/${task.id}/edit`}
 					/>
 				</Tooltip>
 				<Tooltip placement="top" label="Flag task" openDelay={500}>

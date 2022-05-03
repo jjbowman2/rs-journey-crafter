@@ -111,6 +111,7 @@ enum Skill {
     ranged
     prayer
     magic
+    runecraft
     runecrafting
     hitpoints
     crafting

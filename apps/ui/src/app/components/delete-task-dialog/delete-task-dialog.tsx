@@ -15,9 +15,10 @@ export interface DeleteTaskDialogProps {
 	isOpen: boolean;
 	onClose: () => void;
 	task: Task;
+	onDelete?: () => void;
 }
 
-export function DeleteTaskDialog({ isOpen, onClose, task }: DeleteTaskDialogProps) {
+export function DeleteTaskDialog({ isOpen, onClose, task, onDelete }: DeleteTaskDialogProps) {
 	const cancelRef = useRef<HTMLButtonElement | null>(null);
 	const queryClient = useQueryClient();
 	const mutation = useMutation(removeTask, {
@@ -25,6 +26,7 @@ export function DeleteTaskDialog({ isOpen, onClose, task }: DeleteTaskDialogProp
 		onSettled: () => {
 			queryClient.invalidateQueries(["tasks", task.account.id]);
 			onClose();
+			onDelete && onDelete();
 		},
 	});
 
